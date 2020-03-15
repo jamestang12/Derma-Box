@@ -1,0 +1,78 @@
+from time import sleep
+from picamera import PiCamera
+from google.cloud import storage
+
+import RPi.GPIO as GPIO
+import LCD
+import os
+import mysql.connector
+
+camera = PiCamera ()
+camera.resolution = (1024, 768)
+
+GPIO.setmode (GPIO.BCM)
+GPIO.setup (4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+lcd = LCD.LCD ()
+
+counter = 0
+
+lcd.clearScreen ()
+lcd.printOut ("Hello")
+
+os.environ ["GOOGLE_APPLICATION_CREDENTIALS"] = "../token.json"
+
+mydb = mysql.connector.connect(
+    host="34.70.40.173",
+    user="root",
+    passwd="password123",
+    database="test",
+
+)
+
+my_cursor = mydb.cursor()
+
+sqlStuff = "INSERT INTO newhack(username, password, id, image, data) VALUES (%s,%s,%s,%s,%s)"
+record1 = ("Eric3", "Eric123", 40, "link","data")
+my_cursor.execute(sqlStuff, record1)
+mydb.commit()
+
+while True:
+	while True:
+		if (GPIO.input (4) == GPIO.HIGH):
+			counter += 1
+			break
+
+	if (counter == 1):
+		lcd.clearScreen ()
+		lcd.printOut ("One")
+		sleep (1)
+	elif (counter == 2):
+		lcd.clearScreen ()
+		lcd.printOut ("Two")
+		sleep (1)
+	elif (counter == 3):
+		lcd.clearScreen ()
+		lcd.printOut ("Three")
+		counter = 0
+		sleep (1)
+
+def getLink(person, count, disease):
+    letter_Set = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"]
+    new_Name = ""
+    for i in range(10):
+        new_Name += letter_Set[random.randint(0, 10)]
+    new_Name += ".png"
+
+    client = storage.Client()
+    bucket = client.get_bucket('jamestang')
+    with NamedTemporaryFile() as temp:
+        iName = "".join([str(person), ".jpg"])
+        count = count + 1
+        name = person + ".png"
+        blob = bucket.blob(new_Name)  # here
+        blob.upload_from_filename(iName, content_type='image/jpeg')
+        url = blob.public_url
+        sendMeassage(disease, url)
+        return url
+
