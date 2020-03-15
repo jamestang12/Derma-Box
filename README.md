@@ -38,3 +38,15 @@ In addition, our raspberry pi had major firmware issues and odd SSL certificate 
 
 ## What's next for Dermabox
 We want to add more ML models, which detect new diseases, such as seborrheic dermatitis. We also want to tweak our current ML models further, and train them on better (but more expensive) datasets. We were also thinking of creating a cardboard version of Dermabox, which (similar to Google Cardboard) can easily be built by anyone who owns the appropriate hardware components and the code.
+
+## Front-end Developers
+- Derek Wang
+
+## Backend Developers
+- James Tang
+
+## DataSet Developers
+- Robert Ciborowski
+
+## Hardware Developers
+- Eric Ku
