@@ -1,6 +1,19 @@
 # Dermabox - by Team Redbull-On-Rails
 Detects atopic eczema in babies. Used by 3rd-world midwifery nurses.
 
+## Tools
+* Python
+* Tensorflow
+* OpenCV
+* Google Cloud SQL
+* PHP
+* HTML
+* CSS
+* Pandas
+* Twilio
+* Google Coral
+* Raspberry-Pi
+
 ## Inspiration
 When a child is born in the developing world, its midwifery nurse lacks the proper training to detect whether the child has a skin disease. We wanted to create a low-cost, easy to build skin scanner, which is far cheaper than a doctor or current medical equipment. Such a device can alert whether the child has atopic eczema - a disease which is hard to detect. Our friends have told us of winning hackathon projects which targeted healthcare of developed nations, but we think it is a greater priority for humanity to improve the healthcare of developing nations.
 
